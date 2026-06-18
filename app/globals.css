@@ -73,6 +73,31 @@
   }
 }
 
+/* Lesefreundliche Rechtstexte */
+@layer components {
+  .legal {
+    @apply leading-relaxed text-neutral-300;
+  }
+  .legal h2 {
+    @apply mb-3 mt-10 font-display text-xl font-extrabold uppercase tracking-tight text-white;
+  }
+  .legal h3 {
+    @apply mb-2 mt-6 font-semibold text-white;
+  }
+  .legal p {
+    @apply mb-4 max-w-[65ch];
+  }
+  .legal ul {
+    @apply mb-4 max-w-[65ch] list-disc space-y-1 pl-5;
+  }
+  .legal a {
+    @apply text-duttle-yellow underline underline-offset-2;
+  }
+  .legal strong {
+    @apply font-semibold text-white;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
