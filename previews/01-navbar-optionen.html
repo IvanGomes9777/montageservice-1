@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sektion 1 · Navbar — 5 Design-Optionen | Montageservice Duttle</title>
+
+<!--
+  PREVIEW-ONLY: Fonts werden hier per CDN geladen, damit du die echten
+  Schriftbilder siehst. In der PRODUKTION (Next.js) werden sie via
+  `next/font/google` self-hosted ausgeliefert → KEIN Google-Request,
+  DSGVO-konform (siehe Compliance-Guide, Abschnitt 7.1).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ Showroom-Grundgerüst ============ */
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#0b0c0e; --panel:#141619; --line:#23262b; --muted:#8b9099; --text:#eef1f4;
+  }
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #1b1e24 0%, transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:Inter,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin-inline:auto;padding:clamp(1.25rem,3vw,3rem)}
+  .showroom-head{margin-bottom:2.5rem}
+  .kicker{display:inline-flex;align-items:center;gap:.5rem;font:600 .72rem/1 'JetBrains Mono',monospace;
+    letter-spacing:.18em;text-transform:uppercase;color:#FF6A00;background:#FF6A0014;
+    border:1px solid #FF6A0033;padding:.5rem .8rem;border-radius:999px}
+  .showroom-head h1{font:800 clamp(1.6rem,1rem+2.6vw,2.6rem)/1.1 'Space Grotesk',sans-serif;margin:.9rem 0 .4rem}
+  .showroom-head p{color:var(--muted);max-width:62ch;line-height:1.6;margin:0}
+  .legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+  .legend span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);
+    padding:.35rem .7rem;border-radius:8px;background:#ffffff05}
+
+  /* ============ Option-Card ============ */
+  .option{margin:0 0 3.5rem}
+  .option__bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;margin-bottom:.9rem}
+  .option__no{font:800 1rem/1 'JetBrains Mono',monospace;color:#FF6A00}
+  .option__name{font:700 1.18rem/1.2 'Space Grotesk',sans-serif}
+  .option__tag{font-size:.82rem;color:var(--muted)}
+  .option__meta{margin:.75rem 0 0;display:grid;gap:.45rem;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+  .option__meta li{list-style:none;font-size:.82rem;color:#b9bfc7;line-height:1.5;
+    padding-left:1.1rem;position:relative}
+  .option__meta li::before{content:"▸";position:absolute;left:0;color:#FF6A00;font-size:.7rem;top:.2rem}
+  .option__meta b{color:var(--text);font-weight:600}
+
+  /* The scoped scroll frame — sticky-Demo */
+  .frame{margin-top:1rem;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 30px 60px -30px #000a, 0 0 0 1px #ffffff08 inset}
+  .viewport{height:clamp(420px,58vh,560px);overflow-y:auto;overflow-x:hidden;position:relative;
+    container-type:inline-size;scroll-behavior:smooth;background:#000}
+  .viewport::-webkit-scrollbar{width:10px}
+  .viewport::-webkit-scrollbar-thumb{background:#33373d;border-radius:8px}
+  .hint{position:absolute;right:12px;bottom:12px;z-index:60;font:500 .72rem/1 'JetBrains Mono',monospace;
+    color:#fff;background:#000000aa;border:1px solid #ffffff22;padding:.5rem .7rem;border-radius:8px;
+    backdrop-filter:blur(6px);pointer-events:none;animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+  /* Generic stage (mini hero) used inside frames */
+  .stage{min-height:140%;position:relative;display:flex;align-items:center;
+    padding:clamp(2rem,7cqi,5rem) clamp(1.25rem,5cqi,4rem)}
+  .stage__bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+  .stage__in{position:relative;z-index:2;max-width:40rem}
+  .stage h2{margin:.2rem 0 .6rem;line-height:1.05}
+  .stage p{margin:0;line-height:1.6}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* ===================================================================
+     OPTION 1 — "Engineering Clean"  (Default-Empfehlung)
+     =================================================================== */
+  .o1{font-family:Inter,sans-serif}
+  .o1 .stage__bg{background-image:linear-gradient(90deg,#fffffff2 0%,#ffffffcc 38%,#ffffff55 100%),
+    url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=60')}
+  .o1 .stage{background:#F4F5F7}
+  .o1 .utility{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+    background:#1A1D21;color:#cfd3d8;font-size:.78rem;padding:.5rem clamp(1rem,4cqi,2.4rem)}
+  .o1 .utility a{color:#fff;text-decoration:none;font-weight:600}
+  .o1 .utility .u-badges{display:flex;gap:1rem;flex-wrap:wrap}
+  .o1 .utility .dot{color:#37d67a}
+  .o1 .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;background:#fffffff2;backdrop-filter:blur(8px);border-bottom:1px solid #e7e9ec;
+    padding:clamp(.9rem,2.5cqi,1.3rem) clamp(1rem,4cqi,2.4rem);transition:padding .35s ease,box-shadow .35s ease}
+  .o1 .viewport.is-scrolled .nav{padding-block:.6rem;box-shadow:0 10px 30px -18px #1a1d2155}
+  .o1 .logo{display:flex;align-items:center;gap:.65rem;color:#1A1D21;font:700 1.05rem/1 'Space Grotesk',sans-serif;text-decoration:none}
+  .o1 .logo .mark{width:34px;height:34px;border-radius:9px;background:#1A1D21;display:grid;place-items:center;
+    color:#FF6A00;font-weight:800;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .o1 .viewport.is-scrolled .logo .mark{transform:scale(.9)}
+  .o1 .logo small{display:block;font:500 .62rem/1 Inter;letter-spacing:.14em;color:#8b9099;text-transform:uppercase;margin-top:3px}
+  .o1 .menu{display:flex;gap:.3rem;align-items:center}
+  .o1 .menu a{position:relative;color:#33383f;text-decoration:none;font-weight:500;font-size:.92rem;
+    padding:.5rem .8rem;border-radius:8px}
+  .o1 .menu a::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:.32rem;height:2px;
+    background:#FF6A00;transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+  .o1 .menu a:hover{color:#1A1D21}
+  .o1 .menu a:hover::after{transform:scaleX(1)}
+  .o1 .cta{background:#FF6A00;color:#fff;border:none;font-weight:700;font-size:.9rem;
+    padding:.7rem 1.2rem;border-radius:10px;cursor:pointer;text-decoration:none;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease}
+  .o1 .cta:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px #FF6A0099}
+  .o1 .stage h2{font:800 clamp(1.8rem,1rem+4cqi,3rem)/1.05 'Space Grotesk';color:#1A1D21}
+  .o1 .stage .accent{color:#FF6A00}
+  .o1 .stage p{color:#454a52;max-width:36ch}
+  .o1 .kpi{display:flex;gap:1.6rem;margin-top:1.4rem;flex-wrap:wrap}
+  .o1 .kpi b{display:block;font:800 1.4rem/1 'Space Grotesk';color:#1A1D21}
+  .o1 .kpi span{font-size:.76rem;color:#6b7079}
+  .o1 .burger{display:none}
+
+  /* ===================================================================
+     OPTION 2 — "Industrie & Höhe / Bold"
+     =================================================================== */
+  .o2{font-family:Inter,sans-serif}
+  .o2 .stage{background:#0E0E0E}
+  .o2 .stage__bg{background-image:linear-gradient(180deg,#0e0e0ecc 0%,#0e0e0e66 40%,#0e0e0eee 100%),
+    url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=60')}
+  .o2 .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:clamp(1rem,3cqi,1.5rem) clamp(1rem,4cqi,2.4rem);background:transparent;
+    transition:background .4s ease,padding .4s ease,border-color .4s ease;border-bottom:1px solid transparent}
+  .o2 .viewport.is-scrolled .nav{background:#0E0E0Eee;backdrop-filter:blur(10px);
+    padding-block:.7rem;border-bottom:1px solid #FFD40033}
+  .o2 .logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:#fff;
+    font:900 1.15rem/1 Archivo,sans-serif;letter-spacing:-.01em;text-transform:uppercase}
+  .o2 .logo .mark{width:36px;height:36px;background:#FFD400;color:#0E0E0E;display:grid;place-items:center;
+    font:900 1.1rem/1 Archivo;clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)}
+  .o2 .menu{display:flex;gap:.2rem;align-items:center}
+  .o2 .menu a{position:relative;text-decoration:none;color:#d6d6d6;font:700 .82rem/1 Archivo;
+    text-transform:uppercase;letter-spacing:.04em;padding:.6rem .85rem;overflow:hidden}
+  .o2 .menu a span{position:relative;z-index:2;transition:color .25s ease}
+  .o2 .menu a::before{content:"";position:absolute;inset:auto 0 0 0;height:100%;background:#FFD400;
+    transform:translateY(101%);transition:transform .3s cubic-bezier(.2,.8,.2,1);z-index:1}
+  .o2 .menu a:hover::before{transform:translateY(0)}
+  .o2 .menu a:hover span{color:#0E0E0E}
+  .o2 .cta{position:relative;background:#FFD400;color:#0E0E0E;border:none;cursor:pointer;
+    font:800 .85rem/1 Archivo;text-transform:uppercase;letter-spacing:.03em;padding:.85rem 1.3rem;
+    text-decoration:none;clip-path:polygon(8% 0,100% 0,100% 75%,92% 100%,0 100%,0 25%);
+    transition:transform .2s ease,filter .2s ease}
+  .o2 .cta:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .o2 .stage h2{font:900 clamp(2rem,1rem+5.2cqi,3.6rem)/.98 Archivo;color:#fff;text-transform:uppercase;letter-spacing:-.01em}
+  .o2 .stage h2 em{color:#FFD400;font-style:normal}
+  .o2 .stage p{color:#b9b9b9;max-width:40ch;margin-top:.8rem}
+  .o2 .stage .stripe{display:inline-block;background:#FFD400;color:#0E0E0E;font:800 .72rem/1 Archivo;
+    text-transform:uppercase;letter-spacing:.12em;padding:.45rem .7rem;margin-bottom:1rem;transform:skewX(-8deg)}
+  .o2 .burger{display:none}
+
+  /* ===================================================================
+     OPTION 3 — "Vertrauen & Premium"
+     =================================================================== */
+  .o3{font-family:Manrope,sans-serif}
+  .o3 .stage{background:#13294B}
+  .o3 .stage__bg{background-image:linear-gradient(90deg,#13294Bf2 0%,#13294Bbb 45%,#13294B55 100%),
+    url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1600&q=60')}
+  .o3 .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    background:#13294Bf2;backdrop-filter:blur(8px);padding:clamp(1rem,3cqi,1.5rem) clamp(1rem,4cqi,2.4rem);
+    border-bottom:1px solid #ffffff14;transition:padding .4s ease}
+  .o3 .viewport.is-scrolled .nav{padding-block:.7rem}
+  .o3 .logo{display:flex;flex-direction:column;text-decoration:none;color:#fff;line-height:1}
+  .o3 .logo b{font:600 1.25rem/1 'Source Serif 4',serif;letter-spacing:.01em}
+  .o3 .logo b i{color:#B87333;font-style:normal}
+  .o3 .logo small{font:500 .6rem/1 Manrope;letter-spacing:.28em;text-transform:uppercase;color:#9fb0c8;margin-top:5px}
+  .o3 .menu{display:flex;gap:.1rem;align-items:center}
+  .o3 .menu a{position:relative;text-decoration:none;color:#cdd7e6;font-weight:600;font-size:.9rem;padding:.55rem .85rem}
+  .o3 .menu a::after{content:"";position:absolute;left:50%;bottom:.3rem;width:0;height:1.5px;background:#B87333;
+    transform:translateX(-50%);transition:width .35s ease}
+  .o3 .menu a:hover{color:#fff}
+  .o3 .menu a:hover::after{width:calc(100% - 1.7rem)}
+  .o3 .cta{border:1px solid #B87333;background:transparent;color:#E7C9A9;font-family:Manrope;font-weight:700;
+    font-size:.88rem;padding:.7rem 1.3rem;border-radius:2px;cursor:pointer;text-decoration:none;
+    transition:background .3s ease,color .3s ease}
+  .o3 .cta:hover{background:#B87333;color:#13294B}
+  .o3 .stage h2{font:600 clamp(1.9rem,1rem+4.4cqi,3.2rem)/1.08 'Source Serif 4',serif;color:#fff}
+  .o3 .stage h2 i{color:#E7C9A9;font-style:italic}
+  .o3 .stage p{color:#aebdd1;max-width:40ch;margin-top:.9rem}
+  .o3 .stage .eyebrow{font:700 .72rem/1 Manrope;letter-spacing:.22em;text-transform:uppercase;color:#B87333;margin-bottom:1rem}
+  .o3 .burger{display:none}
+
+  /* ===================================================================
+     OPTION 4 — "Floating Glass Pill"
+     =================================================================== */
+  .o4 .stage{background:#0d1117}
+  .o4 .stage__bg{background-image:linear-gradient(180deg,#0d1117aa,#0d1117dd),
+    url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1600&q=60')}
+  .o4 .navwrap{position:sticky;top:0;z-index:50;padding:clamp(.8rem,3cqi,1.4rem) clamp(.8rem,4cqi,2rem);
+    transition:padding .4s ease}
+  .o4 .viewport.is-scrolled .navwrap{padding-top:.7rem}
+  .o4 .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    background:#161a21cc;backdrop-filter:blur(16px) saturate(1.3);border:1px solid #ffffff1a;
+    border-radius:999px;padding:.55rem .65rem .55rem 1.1rem;box-shadow:0 20px 40px -22px #000c;
+    transition:max-width .4s ease,box-shadow .4s ease;max-width:980px;margin-inline:auto}
+  .o4 .viewport.is-scrolled .nav{box-shadow:0 16px 34px -16px #000,0 0 0 1px #FF6A0040}
+  .o4 .logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:#fff;font:700 1rem/1 'Space Grotesk',sans-serif}
+  .o4 .logo .mark{width:30px;height:30px;border-radius:50%;background:
+    conic-gradient(from 180deg,#FF6A00,#ff9a4d,#FF6A00);display:grid;place-items:center;color:#0d1117;font-weight:900;font-size:.85rem}
+  .o4 .menu{position:relative;display:flex;gap:.1rem;align-items:center}
+  .o4 .menu a{position:relative;z-index:2;text-decoration:none;color:#c7ccd4;font-weight:500;font-size:.88rem;
+    padding:.5rem .85rem;border-radius:999px;transition:color .25s ease}
+  .o4 .menu a:hover,.o4 .menu a.active{color:#fff}
+  .o4 .menu .pill{position:absolute;z-index:1;top:0;height:100%;border-radius:999px;background:#ffffff16;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1);left:0}
+  .o4 .right{display:flex;align-items:center;gap:.7rem}
+  .o4 .status{display:flex;align-items:center;gap:.4rem;font:500 .74rem/1 'JetBrains Mono',monospace;color:#9aa2ad}
+  .o4 .status .led{width:8px;height:8px;border-radius:50%;background:#37d67a;box-shadow:0 0 0 0 #37d67a99;animation:led 2s infinite}
+  @keyframes led{0%{box-shadow:0 0 0 0 #37d67a88}70%{box-shadow:0 0 0 7px #37d67a00}100%{box-shadow:0 0 0 0 #37d67a00}}
+  .o4 .cta{background:#FF6A00;color:#fff;border:none;cursor:pointer;font-weight:700;font-size:.86rem;
+    padding:.6rem 1.1rem;border-radius:999px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+  .o4 .cta:hover{transform:translateY(-2px);box-shadow:0 10px 22px -8px #FF6A0099}
+  .o4 .stage h2{font:800 clamp(1.9rem,1rem+4.6cqi,3.2rem)/1.05 'Space Grotesk';color:#fff}
+  .o4 .stage h2 .accent{background:linear-gradient(90deg,#FF6A00,#ffb27a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .o4 .stage p{color:#aab1bb;max-width:40ch;margin-top:.8rem}
+  .o4 .burger{display:none}
+
+  /* ===================================================================
+     OPTION 5 — "Split Command Bar / Editorial"
+     =================================================================== */
+  .o5{font-family:Inter,sans-serif}
+  .o5 .stage{background:#101113}
+  .o5 .stage__bg{background-image:linear-gradient(90deg,#101113f5,#101113aa 60%,#10111366),
+    url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=60')}
+  .o5 .nav{position:sticky;top:0;z-index:50;display:grid;grid-template-columns:auto 1fr auto;align-items:stretch;
+    background:#0c0d0f;border-bottom:1px solid #2a2d33;transition:box-shadow .4s ease}
+  .o5 .viewport.is-scrolled .nav{box-shadow:0 14px 30px -18px #000}
+  .o5 .brand{display:flex;align-items:center;gap:.6rem;padding:1rem clamp(1rem,3cqi,1.6rem);
+    border-right:1px solid #2a2d33;text-decoration:none;color:#fff}
+  .o5 .brand .mark{width:32px;height:32px;border:2px solid #FF6A00;display:grid;place-items:center;
+    color:#FF6A00;font:800 .85rem/1 'JetBrains Mono',monospace}
+  .o5 .brand b{font:700 1rem/1 'Space Grotesk',sans-serif}
+  .o5 .center{display:flex;align-items:center;overflow:hidden}
+  .o5 .ticker{display:flex;align-items:center;gap:1.4rem;padding-inline:1.2rem;
+    font:500 .72rem/1 'JetBrains Mono',monospace;color:#7d828b;white-space:nowrap}
+  .o5 .ticker b{color:#FF6A00}
+  .o5 .menu{display:flex;align-items:stretch;margin-left:auto}
+  .o5 .menu a{display:flex;align-items:center;text-decoration:none;color:#c4c8ce;font-weight:500;font-size:.86rem;
+    padding:0 clamp(.7rem,2cqi,1.1rem);border-left:1px solid #2a2d33;transition:background .25s ease,color .25s ease}
+  .o5 .menu a:hover{background:#16181b;color:#fff}
+  .o5 .cta{display:flex;align-items:center;gap:.5rem;background:#FF6A00;color:#fff;text-decoration:none;
+    font-weight:700;font-size:.86rem;padding:0 clamp(1rem,3cqi,1.6rem);transition:filter .25s ease}
+  .o5 .cta:hover{filter:brightness(1.08)}
+  .o5 .cta .arrow{transition:transform .3s ease}
+  .o5 .cta:hover .arrow{transform:translateX(4px)}
+  .o5 .stage h2{font:800 clamp(2rem,1rem+5cqi,3.4rem)/1.02 'Space Grotesk';color:#fff}
+  .o5 .stage h2 .accent{color:#FF6A00}
+  .o5 .stage p{color:#a7adb5;max-width:42ch;margin-top:.9rem}
+  .o5 .stage .meta{display:flex;gap:1.2rem;margin-top:1.3rem;font:500 .74rem/1.4 'JetBrains Mono',monospace;color:#8b9099;flex-wrap:wrap}
+  .o5 .stage .meta b{color:#fff;display:block}
+  .o5 .burger{display:none}
+
+  /* ============ Responsive: Navs ab schmalem Container → Burger ============ */
+  @container (max-width: 760px){
+    .menu{display:none!important}
+    .o1 .utility .u-badges{display:none}
+    .burger{display:grid!important;place-items:center;width:42px;height:42px;border-radius:10px;
+      border:1px solid currentColor;background:transparent;cursor:pointer;color:inherit}
+    .o2 .logo .mark,.o5 .ticker{}
+    .o5 .center{display:none}
+    .o5 .nav{grid-template-columns:1fr auto}
+    .o4 .status{display:none}
+  }
+  .burger svg{width:20px;height:20px}
+
+  .footnote{color:var(--muted);font-size:.84rem;line-height:1.7;border-top:1px solid var(--line);
+    margin-top:1rem;padding-top:1.5rem}
+  .footnote b{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="showroom-head">
+    <span class="kicker">● Sektion 1 / 5 · Navbar &amp; Header</span>
+    <h1>5 Design-Optionen für die Navbar</h1>
+    <p>Live-Vergleich für <b>Montageservice Duttle</b>. Jede Option hat ein eigenes Animationskonzept.
+       <b>Scrolle in jedem Frame nach unten</b>, um Sticky- &amp; Shrink-Verhalten zu sehen — und fahre über
+       Menüpunkte/Buttons für die Micro-Interactions.</p>
+    <div class="legend">
+      <span>🖱️ Hover = Micro-Animation</span>
+      <span>↕️ Scroll im Frame = Sticky/Shrink</span>
+      <span>📐 Fenster schmal ziehen = responsive Burger (Container Query)</span>
+      <span>🎨 Echte Firmendaten &amp; Unsplash-Bilder</span>
+    </div>
+  </header>
+
+  <!-- ============================ OPTION 1 ============================ -->
+  <section class="option o1">
+    <div class="option__bar">
+      <span class="option__no">01</span>
+      <span class="option__name">Engineering Clean</span>
+      <span class="option__tag">— seriös, ingenieurmäßig · <b>meine Empfehlung als Default</b></span>
+    </div>
+    <ul class="option__meta">
+      <li><b>Farben:</b> Weiß / Anthrazit #1A1D21 / Signal-Orange #FF6A00</li>
+      <li><b>Typo:</b> Space Grotesk (Headlines) + Inter (Body)</li>
+      <li><b>Besonderheit:</b> Utility-Bar oben (Tel · FISAT/IRATA · „&lt;24h")</li>
+      <li><b>Animation:</b> Navbar schrumpft beim Scrollen, Logo skaliert, Underline-Reveal, Button-Lift</li>
+    </ul>
+    <div class="frame">
+      <div class="viewport" data-frame>
+        <div class="utility">
+          <span>Mo–Fr 07–18 Uhr · Einsatzradius DE + EU</span>
+          <span class="u-badges">
+            <span><span class="dot">●</span> FISAT &amp; IRATA zertifiziert</span>
+            <span>Antwort i. d. R. &lt; 24 h</span>
+            <a href="#">☎ 0174 1708926</a>
+          </span>
+        </div>
+        <nav class="nav">
+          <a class="logo" href="#"><span class="mark">D</span><span>MONTAGESERVICE DUTTLE<small>Arbeiten in der Höhe</small></span></a>
+          <div class="menu">
+            <a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a>
+            <a href="#">Presse</a><a href="#">Kontakt</a>
+          </div>
+          <a class="cta" href="#">Projekt anfragen</a>
+          <button class="burger" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </nav>
+        <div class="stage">
+          <div class="stage__bg"></div>
+          <div class="stage__in">
+            <h2>Membranbau, Montage &amp; Reinigung<br><span class="accent">aus einer Hand.</span></h2>
+            <p>Zertifizierte Höhenarbeiter erledigen, wofür andere ein Gerüst brauchen — schneller, sicherer, ohne Betriebsunterbrechung.</p>
+            <div class="kpi">
+              <div><b>2011</b><span>gegründet</span></div>
+              <div><b>15+</b><span>Jahre Erfahrung</span></div>
+              <div><b>7 Länder</b><span>Referenzprojekte</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hint">↓ scrollen zum Testen</div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION 2 ============================ -->
+  <section class="option o2">
+    <div class="option__bar">
+      <span class="option__no">02</span>
+      <span class="option__name">Industrie &amp; Höhe / Bold</span>
+      <span class="option__tag">— Adrenalin + Kompetenz, wenn Industrieklettern das Aushängeschild ist</span>
+    </div>
+    <ul class="option__meta">
+      <li><b>Farben:</b> Schwarz #0E0E0E / Stahl / Baustellen-Gelb #FFD400</li>
+      <li><b>Typo:</b> Archivo (kräftig, Versalien)</li>
+      <li><b>Besonderheit:</b> transparent über Hero → wird beim Scrollen solide</li>
+      <li><b>Animation:</b> Gelb „füllt" Menüpunkte von unten, Schräg-Cuts, CTA-Lift</li>
+    </ul>
+    <div class="frame">
+      <div class="viewport" data-frame>
+        <nav class="nav">
+          <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+          <div class="menu">
+            <a href="#"><span>Leistungen</span></a><a href="#"><span>Referenzen</span></a>
+            <a href="#"><span>Über uns</span></a><a href="#"><span>Presse</span></a><a href="#"><span>Kontakt</span></a>
+          </div>
+          <a class="cta" href="#">Projekt anfragen</a>
+          <button class="burger" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </nav>
+        <div class="stage">
+          <div class="stage__bg"></div>
+          <div class="stage__in">
+            <span class="stripe">Höhenarbeit ohne Gerüst</span>
+            <h2>WIR ARBEITEN DORT,<br>WO ANDERE <em>AUFHÖREN.</em></h2>
+            <p>Seilzugangstechnik nach FISAT &amp; IRATA — von der Fassade in 70 m bis zum ETFE-Dach. Geht nicht, gibt's nicht.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hint">↓ scrollen zum Testen</div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION 3 ============================ -->
+  <section class="option o3">
+    <div class="option__bar">
+      <span class="option__no">03</span>
+      <span class="option__name">Vertrauen &amp; Premium</span>
+      <span class="option__tag">— gehoben, referenzlastig · stark für Architektur-/Großkunden &amp; Membranbau</span>
+    </div>
+    <ul class="option__meta">
+      <li><b>Farben:</b> Marine #13294B / Kupfer #B87333 / Warmgrau</li>
+      <li><b>Typo:</b> Source Serif 4 (Headlines) + Manrope (Body)</li>
+      <li><b>Besonderheit:</b> Serif-Wortmarke, ruhige Eleganz</li>
+      <li><b>Animation:</b> Kupfer-Underline wächst aus der Mitte, sanftes Shrink</li>
+    </ul>
+    <div class="frame">
+      <div class="viewport" data-frame>
+        <nav class="nav">
+          <a class="logo" href="#"><b>Duttle<i>.</i></b><small>Membranbau · Höhentechnik</small></a>
+          <div class="menu">
+            <a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a>
+            <a href="#">Presse</a><a href="#">Kontakt</a>
+          </div>
+          <a class="cta" href="#">Projekt anfragen</a>
+          <button class="burger" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </nav>
+        <div class="stage">
+          <div class="stage__bg"></div>
+          <div class="stage__in">
+            <div class="eyebrow">Textile Architektur seit 2011</div>
+            <h2>Wo Tragwerk und Licht<br>zur <i>Architektur</i> werden.</h2>
+            <p>ETFE, PVC &amp; PTFE — geplant, konfektioniert, montiert und gewartet. Referenzen u. a. ThyssenKrupp Testturm &amp; HSV-Campus.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hint">↓ scrollen zum Testen</div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION 4 ============================ -->
+  <section class="option o4">
+    <div class="option__bar">
+      <span class="option__no">04</span>
+      <span class="option__name">Floating Glass Pill</span>
+      <span class="option__tag">— modern-techy, schwebende Glas-Navbar mit gleitendem Indikator</span>
+    </div>
+    <ul class="option__meta">
+      <li><b>Farben:</b> Dark #0d1117 / Glas-Blur / Orange #FF6A00</li>
+      <li><b>Typo:</b> Space Grotesk + Inter</li>
+      <li><b>Besonderheit:</b> abgesetzte Pill, „Einsatzbereit"-Status-LED</li>
+      <li><b>Animation:</b> Glas-Pill gleitet zum aktiven Menüpunkt, Glow beim Scrollen</li>
+    </ul>
+    <div class="frame">
+      <div class="viewport" data-frame>
+        <div class="navwrap">
+          <nav class="nav">
+            <a class="logo" href="#"><span class="mark">D</span>Duttle</a>
+            <div class="menu" data-pillmenu>
+              <span class="pill"></span>
+              <a href="#" class="active">Leistungen</a><a href="#">Referenzen</a>
+              <a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a>
+            </div>
+            <div class="right">
+              <span class="status"><span class="led"></span> Einsatzbereit</span>
+              <a class="cta" href="#">Anfragen</a>
+            </div>
+            <button class="burger" aria-label="Menü"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+          </nav>
+        </div>
+        <div class="stage">
+          <div class="stage__bg"></div>
+          <div class="stage__in">
+            <h2>Ihr Partner für alles <span class="accent">in der Höhe.</span></h2>
+            <p>Inspektion, Montage, Reinigung &amp; Reparatur an textilen Bauwerken — dokumentiert, normgerecht, weltweit im Einsatz.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hint">↓ scrollen · Menü hovern</div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION 5 ============================ -->
+  <section class="option o5">
+    <div class="option__bar">
+      <span class="option__no">05</span>
+      <span class="option__name">Split Command Bar / Editorial</span>
+      <span class="option__tag">— industriell-editorial, Raster &amp; Mono-Ticker · sehr eigenständig</span>
+    </div>
+    <ul class="option__meta">
+      <li><b>Farben:</b> Tiefschwarz #0c0d0f / Linien-Grid / Orange #FF6A00</li>
+      <li><b>Typo:</b> Space Grotesk + JetBrains Mono (Meta)</li>
+      <li><b>Besonderheit:</b> Trennlinien-Raster, Live-Ticker (FISAT·IRATA·Münster·EST.2011)</li>
+      <li><b>Animation:</b> Hover füllt Zellen, CTA-Pfeil schiebt, Mono-Ticker</li>
+    </ul>
+    <div class="frame">
+      <div class="viewport" data-frame>
+        <nav class="nav">
+          <a class="brand" href="#"><span class="mark">MD</span><b>DUTTLE</b></a>
+          <div class="center">
+            <div class="ticker">
+              <span><b>●</b> FISAT &amp; IRATA</span><span><b>/</b> Seilzugangstechnik</span>
+              <span><b>/</b> Münster · DE+EU</span><span><b>/</b> EST. 2011</span><span><b>/</b> Antwort &lt; 24h</span>
+            </div>
+          </div>
+          <div class="menu">
+            <a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über&nbsp;uns</a><a href="#">Presse</a>
+          </div>
+          <a class="cta" href="#">Projekt anfragen <span class="arrow">→</span></a>
+        </nav>
+        <div class="stage">
+          <div class="stage__bg"></div>
+          <div class="stage__in">
+            <h2>Spezialisten für <span class="accent">Arbeiten<br>in der Höhe</span> &amp; am Bau.</h2>
+            <p>Membranbau · Industrieklettern · Spezialmontagen · Reinigung — ein Team, ein Ansprechpartner, gewerkeübergreifend.</p>
+            <div class="meta">
+              <span><b>15+ Jahre</b>Erfahrung</span>
+              <span><b>~70 m</b>Einsatzhöhe (Hegau-Tower)</span>
+              <span><b>DMAX</b>„Helden der Baustelle"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hint">↓ scrollen zum Testen</div>
+    </div>
+  </section>
+
+  <p class="footnote">
+    <b>Hinweis:</b> Dies ist ein interaktiver Design-Vergleich (Sektion 1). Noch keine Produktions-Komponente —
+    nach deiner Wahl baue ich die Option als saubere, voll responsive Next.js/React-Komponente
+    (self-hosted Fonts via <code>next/font</code>, semantisches HTML, A11y, Schema-ready).<br>
+    <b>Bilder:</b> Platzhalter von Unsplash — werden später durch eure echten Projektfotos ersetzt.
+  </p>
+</div>
+
+<script>
+  /* Sticky/Shrink: pro Frame eigener Scroll-Listener */
+  document.querySelectorAll('[data-frame]').forEach(function(vp){
+    var onScroll = function(){ vp.classList.toggle('is-scrolled', vp.scrollTop > 24); };
+    vp.addEventListener('scroll', onScroll, {passive:true});
+  });
+
+  /* Option 4: gleitende Glas-Pill folgt aktivem/gehovertem Menüpunkt */
+  document.querySelectorAll('[data-pillmenu]').forEach(function(menu){
+    var pill = menu.querySelector('.pill');
+    var links = menu.querySelectorAll('a');
+    function move(el){
+      pill.style.width = el.offsetWidth + 'px';
+      pill.style.transform = 'translateX(' + el.offsetLeft + 'px)';
+    }
+    var active = menu.querySelector('a.active') || links[0];
+    requestAnimationFrame(function(){ move(active); });
+    links.forEach(function(a){
+      a.addEventListener('mouseenter', function(){ move(a); });
+    });
+    menu.addEventListener('mouseleave', function(){ move(menu.querySelector('a.active') || links[0]); });
+    window.addEventListener('resize', function(){ move(menu.querySelector('a.active') || links[0]); });
+  });
+</script>
+</body>
+</html>
