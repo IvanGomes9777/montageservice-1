@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sektion 4 · Referenzen — 5 Design-Optionen | Montageservice Duttle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{--black:#0E0E0E;--ink:#0C0D0F;--yellow:#FFD400;--muted:#8b9099;--line:#23262b}
+  html,body{margin:0}
+  body{background:var(--ink);color:#eef1f4;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin-inline:auto;padding:clamp(1.25rem,3vw,3rem)}
+  .kicker{display:inline-flex;gap:.5rem;font:700 .72rem/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:.5rem .8rem}
+  .showroom-head h1{font:900 clamp(1.7rem,1rem+2.8vw,2.8rem)/1.05 Archivo;text-transform:uppercase;margin:.9rem 0 .4rem}
+  .showroom-head p{color:var(--muted);max-width:64ch;line-height:1.6;margin:0}
+  .legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+  .legend span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:.35rem .7rem;border-radius:8px;background:#ffffff05}
+  .option{margin:0 0 3.5rem}
+  .option__bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;margin-bottom:.9rem}
+  .option__no{font:900 1.05rem/1 'JetBrains Mono',monospace;color:var(--yellow)}
+  .option__name{font:800 1.2rem/1.2 Archivo;text-transform:uppercase}
+  .option__tag{font-size:.82rem;color:var(--muted)}
+  .option__meta{margin:.7rem 0 0;display:grid;gap:.4rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+  .option__meta li{list-style:none;font-size:.82rem;color:#b9bfc7;line-height:1.5;padding-left:1.1rem;position:relative}
+  .option__meta li::before{content:"▸";position:absolute;left:0;color:var(--yellow);font-size:.7rem;top:.2rem}
+  .option__meta b{color:#fff;font-weight:600}
+  .frame{margin-top:1rem;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px #000a;background:var(--black)}
+  .sec{padding:clamp(2rem,5vw,3.5rem) clamp(1.25rem,4vw,2.4rem)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+  .sec-head .ey{font:700 .7rem/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow)}
+  .sec-head h3{font:900 clamp(1.6rem,1rem+3vw,2.6rem)/1.05 Archivo;text-transform:uppercase;margin:.7rem 0 0}
+  .sec-head h3 em{color:var(--yellow);font-style:normal}
+  .sec-head p{color:#b9b9b9;max-width:42ch;margin:.6rem 0 0;line-height:1.6}
+  .allbtn{font:800 .8rem/1 Archivo;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:.85rem 1.3rem;text-decoration:none;white-space:nowrap;
+    clip-path:polygon(8% 0,100% 0,100% 75%,92% 100%,0 100%,0 25%);transition:transform .2s ease}
+  .allbtn:hover{transform:translateY(-2px)}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+  .in .reveal{opacity:1;transform:none}
+  .in .reveal.d1{transition-delay:.06s}.in .reveal.d2{transition-delay:.14s}.in .reveal.d3{transition-delay:.22s}.in .reveal.d4{transition-delay:.3s}.in .reveal.d5{transition-delay:.38s}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}*{animation:none!important}}
+
+  /* ===== O1 Project Grid ===== */
+  .o1 .grid{display:grid;gap:1px;background:#ffffff18;border:1px solid #ffffff18;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+  .o1 .proj{position:relative;min-height:260px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:1.3rem;text-decoration:none;color:#fff;background:var(--black)}
+  .o1 .proj .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .o1 .proj:hover .bg{transform:scale(1.08)}
+  .o1 .proj::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0e0e22,#0e0e0eee);z-index:1}
+  .o1 .proj>*{position:relative;z-index:2}
+  .o1 .proj .tag{position:absolute;top:1rem;left:1rem;z-index:2;background:var(--yellow);color:var(--black);font:800 .66rem/1 Archivo;text-transform:uppercase;padding:.35rem .55rem}
+  .o1 .proj .loc{font:500 .72rem/1 'JetBrains Mono',monospace;color:var(--yellow);text-transform:uppercase;letter-spacing:.06em}
+  .o1 .proj h4{font:800 1.25rem/1.05 Archivo;text-transform:uppercase;margin:.5rem 0 0;transform:translateY(6px);transition:transform .3s ease}
+  .o1 .proj:hover h4{transform:none}
+
+  /* ===== O2 Featured + List ===== */
+  .o2 .lay{display:grid;grid-template-columns:1.4fr 1fr;gap:1.2rem}
+  .o2 .feat{position:relative;min-height:420px;overflow:hidden;border:1px solid #ffffff18;display:flex;flex-direction:column;justify-content:flex-end;padding:1.8rem}
+  .o2 .feat .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .4s ease}
+  .o2 .feat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0e0e33,#0e0e0eee)}
+  .o2 .feat>*{position:relative;z-index:2}
+  .o2 .feat .tag{align-self:flex-start;background:var(--yellow);color:var(--black);font:800 .68rem/1 Archivo;text-transform:uppercase;padding:.4rem .6rem}
+  .o2 .feat .loc{font:500 .76rem/1 'JetBrains Mono',monospace;color:var(--yellow);text-transform:uppercase;margin-top:auto}
+  .o2 .feat h4{font:900 clamp(1.6rem,1rem+2vw,2.4rem)/1 Archivo;text-transform:uppercase;margin:.5rem 0 0}
+  .o2 .list{display:flex;flex-direction:column;border:1px solid #ffffff18}
+  .o2 .li{display:flex;gap:.9rem;align-items:center;padding:.85rem;border-bottom:1px solid #ffffff14;cursor:pointer;text-decoration:none;color:#fff;transition:background .25s ease}
+  .o2 .li:last-child{border-bottom:none}
+  .o2 .li:hover,.o2 .li.active{background:#ffffff0a}
+  .o2 .li .th{width:64px;height:48px;background-size:cover;background-position:center;flex:none}
+  .o2 .li .n{font:700 .72rem/1 'JetBrains Mono',monospace;color:var(--muted)}
+  .o2 .li.active .n{color:var(--yellow)}
+  .o2 .li b{font:800 .98rem/1.05 Archivo;text-transform:uppercase}
+  .o2 .li span.l{display:block;font:500 .7rem/1 'JetBrains Mono',monospace;color:var(--muted);margin-top:.25rem}
+  @media (max-width:820px){.o2 .lay{grid-template-columns:1fr}.o2 .feat{min-height:300px}}
+
+  /* ===== O3 Horizontal Scroll ===== */
+  .o3 .rail{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem;scroll-snap-type:x mandatory;cursor:grab}
+  .o3 .rail::-webkit-scrollbar{height:8px}.o3 .rail::-webkit-scrollbar-thumb{background:#33373d;border-radius:8px}
+  .o3 .card{position:relative;flex:0 0 300px;min-height:380px;scroll-snap-align:start;overflow:hidden;border:1px solid #ffffff18;display:flex;flex-direction:column;justify-content:flex-end;padding:1.4rem;text-decoration:none;color:#fff}
+  .o3 .card .bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+  .o3 .card:hover .bg{transform:scale(1.07)}
+  .o3 .card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0e0e22,#0e0e0eee)}
+  .o3 .card>*{position:relative;z-index:2}
+  .o3 .card .flag{position:absolute;top:1rem;right:1rem;z-index:2;background:#0e0e0ecc;border:1px solid var(--yellow);color:var(--yellow);font:700 .68rem/1 'JetBrains Mono',monospace;padding:.35rem .5rem}
+  .o3 .card .tag{font:500 .72rem/1 'JetBrains Mono',monospace;color:var(--yellow);text-transform:uppercase}
+  .o3 .card h4{font:800 1.2rem/1.05 Archivo;text-transform:uppercase;margin:.4rem 0 0}
+  .o3 .hintbar{display:flex;align-items:center;gap:.5rem;color:var(--muted);font:500 .74rem/1 'JetBrains Mono',monospace;margin-top:.5rem}
+
+  /* ===== O4 International ===== */
+  .o4 .top{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;margin-bottom:2rem;flex-wrap:wrap}
+  .o4 .big{font:900 clamp(3rem,2rem+6vw,6rem)/.9 Archivo;color:var(--yellow)}
+  .o4 .big small{display:block;font:700 .8rem/1 'JetBrains Mono',monospace;color:#fff;text-transform:uppercase;letter-spacing:.1em;margin-top:.6rem}
+  .o4 .flags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .o4 .flags span{border:1px solid #ffffff22;color:#d6d6d6;font:700 .8rem/1 Archivo;text-transform:uppercase;padding:.55rem .8rem;transition:.25s ease}
+  .o4 .flags span:hover{border-color:var(--yellow);color:var(--yellow)}
+  .o4 .grid{display:grid;gap:1px;background:#ffffff18;border:1px solid #ffffff18;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+  .o4 .proj{position:relative;min-height:180px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:1.1rem;color:#fff;text-decoration:none;background:var(--black)}
+  .o4 .proj .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.4;transition:.5s ease}
+  .o4 .proj:hover .bg{opacity:.6;transform:scale(1.06)}
+  .o4 .proj::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#0e0e0eee)}
+  .o4 .proj>*{position:relative;z-index:2}
+  .o4 .proj .loc{font:500 .7rem/1 'JetBrains Mono',monospace;color:var(--yellow)}
+  .o4 .proj h4{font:800 1.05rem/1 Archivo;text-transform:uppercase;margin:.35rem 0 0}
+
+  /* ===== O5 Big Slider ===== */
+  .o5 .slider{position:relative;min-height:440px;overflow:hidden;border:1px solid #ffffff18}
+  .o5 .slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+  .o5 .slide.active{opacity:1}
+  .o5 .slide .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);transition:transform 6s ease}
+  .o5 .slide.active .bg{transform:scale(1)}
+  .o5 .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0e0e0e33,#0e0e0ee6)}
+  .o5 .slide>*{position:relative;z-index:2}
+  .o5 .slide .tag{align-self:flex-start;background:var(--yellow);color:var(--black);font:800 .68rem/1 Archivo;text-transform:uppercase;padding:.4rem .6rem}
+  .o5 .slide .loc{font:500 .78rem/1 'JetBrains Mono',monospace;color:var(--yellow);text-transform:uppercase;margin-top:1rem}
+  .o5 .slide h4{font:900 clamp(1.8rem,1rem+3vw,3rem)/1 Archivo;text-transform:uppercase;margin:.4rem 0 0}
+  .o5 .ctrl{position:absolute;z-index:5;bottom:2rem;right:2rem;display:flex;gap:.5rem}
+  .o5 .ctrl button{width:48px;height:48px;border:1px solid #ffffff44;background:#0e0e0eaa;color:#fff;font-size:1.2rem;cursor:pointer;transition:.2s ease}
+  .o5 .ctrl button:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow)}
+  .o5 .count{position:absolute;z-index:5;top:2rem;left:2rem;font:700 .9rem/1 'JetBrains Mono',monospace;color:#fff}
+  .o5 .count b{color:var(--yellow)}
+
+  .footnote{color:var(--muted);font-size:.84rem;line-height:1.7;border-top:1px solid var(--line);margin-top:1rem;padding-top:1.5rem}
+  .footnote b{color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="showroom-head">
+    <span class="kicker">● Sektion 4 / Referenzen · 5 Optionen</span>
+    <h1>5 Referenzen-Layouts — der Trust-Beweis</h1>
+    <p>Eure echten Vorzeigeprojekte (Rottweil bis New York, 7 Länder). Alle in Schwarz/Gelb, je eigenes Konzept.
+       Scrollen für Reveal, hovern/klicken/wischen für die Interaktionen.</p>
+    <div class="legend"><span>↕️ Scroll = Reveal</span><span>🖱️ Hover/Klick/Drag</span><span>🌍 Echte Projektdaten</span></div>
+  </header>
+
+  <!-- O1 -->
+  <section class="option o1">
+    <div class="option__bar"><span class="option__no">01</span><span class="option__name">Project Grid</span><span class="option__tag">— Bild-Raster mit Overlay · <b>klassisch &amp; SEO-stark</b></span></div>
+    <ul class="option__meta"><li><b>Layout:</b> Karten-Raster mit Material-Tag</li><li><b>Animation:</b> Bild-Zoom, Titel steigt auf</li><li><b>Stärke:</b> viele Projekte gleichwertig, scanbar</li></ul>
+    <div class="frame"><div class="sec" data-reveal>
+      <div class="sec-head"><div><div class="ey reveal">Referenzen</div><h3 class="reveal d1">Projekte, die <em>für sich sprechen.</em></h3><p class="reveal d2">Von Rottweil bis New York — in 7 Ländern im Einsatz.</p></div><a class="allbtn reveal d2" href="#">Alle Referenzen →</a></div>
+      <div class="grid">
+        <a class="proj reveal d1" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">PTFE</span><span class="loc">Rottweil · DE</span><h4>ThyssenKrupp Testturm</h4></a>
+        <a class="proj reveal d2" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">PTFE</span><span class="loc">Hamburg · DE</span><h4>HSV-Campus</h4></a>
+        <a class="proj reveal d3" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">ETFE</span><span class="loc">Dresden · DE</span><h4>Elefantenhaus</h4></a>
+        <a class="proj reveal d3" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">ETFE</span><span class="loc">Kopenhagen · DK</span><h4>FRBC-Center</h4></a>
+        <a class="proj reveal d4" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">PTFE</span><span class="loc">Al'Ain · UAE</span><h4>Private School</h4></a>
+        <a class="proj reveal d5" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=800&q=60')"></div><span class="tag">PVC</span><span class="loc">New York · US</span><h4>NCL Breakaway</h4></a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- O2 -->
+  <section class="option o2">
+    <div class="option__bar"><span class="option__no">02</span><span class="option__name">Featured + List</span><span class="option__tag">— ein Highlight groß, Rest als Liste · fokussiert</span></div>
+    <ul class="option__meta"><li><b>Layout:</b> Feature-Bild + Auswahl-Liste</li><li><b>Animation:</b> Hover auf Liste tauscht Feature</li><li><b>Stärke:</b> ein Leuchtturm-Projekt im Fokus</li></ul>
+    <div class="frame"><div class="sec" data-reveal>
+      <div class="sec-head"><div><div class="ey reveal">Ausgewählte Projekte</div><h3 class="reveal d1">Referenzen.</h3></div><a class="allbtn reveal d2" href="#">Alle ansehen →</a></div>
+      <div class="lay reveal d1" id="o2">
+        <a class="feat" href="#"><div class="bg" id="o2bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1100&q=60')"></div><span class="tag" id="o2tag">PTFE-Membranfassade</span><span class="loc" id="o2loc">Rottweil · DE</span><h4 id="o2title">ThyssenKrupp Testturm</h4></a>
+        <div class="list">
+          <a class="li active" data-img="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1100&q=60" data-title="ThyssenKrupp Testturm" data-loc="Rottweil · DE" data-tag="PTFE-Membranfassade"><span class="n">01</span><div class="th" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=200&q=50')"></div><div><b>ThyssenKrupp Testturm</b><span class="l">Rottweil · DE</span></div></a>
+          <a class="li" data-img="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1100&q=60" data-title="HSV-Campus" data-loc="Hamburg · DE" data-tag="PTFE-Konstruktion"><span class="n">02</span><div class="th" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=200&q=50')"></div><div><b>HSV-Campus</b><span class="l">Hamburg · DE</span></div></a>
+          <a class="li" data-img="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1100&q=60" data-title="Elefantenhaus" data-loc="Dresden · DE" data-tag="ETFE-Neueindeckung"><span class="n">03</span><div class="th" style="background-image:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=200&q=50')"></div><div><b>Elefantenhaus</b><span class="l">Dresden · DE</span></div></a>
+          <a class="li" data-img="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1100&q=60" data-title="FRBC-Center" data-loc="Kopenhagen · DK" data-tag="ETFE-Kissendach"><span class="n">04</span><div class="th" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=200&q=50')"></div><div><b>FRBC-Center</b><span class="l">Kopenhagen · DK</span></div></a>
+          <a class="li" data-img="https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=1100&q=60" data-title="NCL Breakaway" data-loc="New York · US" data-tag="PVC-Sonnensegel"><span class="n">05</span><div class="th" style="background-image:url('https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=200&q=50')"></div><div><b>NCL Breakaway</b><span class="l">New York · US</span></div></a>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- O3 -->
+  <section class="option o3">
+    <div class="option__bar"><span class="option__no">03</span><span class="option__name">Horizontal Scroll</span><span class="option__tag">— wischbare Karten-Reihe mit Länder-Flag · modern</span></div>
+    <ul class="option__meta"><li><b>Layout:</b> horizontale Schiene, Snap</li><li><b>Animation:</b> Drag/Scroll, Bild-Zoom</li><li><b>Stärke:</b> viele Projekte platzsparend</li></ul>
+    <div class="frame"><div class="sec" data-reveal>
+      <div class="sec-head"><div><div class="ey reveal">Referenzen weltweit</div><h3 class="reveal d1">Wisch dich <em>um die Welt.</em></h3></div><a class="allbtn reveal d2" href="#">Alle →</a></div>
+      <div class="rail reveal d1" id="o3rail">
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">DE</span><span class="tag">PTFE</span><h4>ThyssenKrupp Testturm</h4></a>
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">DK</span><span class="tag">ETFE</span><h4>FRBC-Center</h4></a>
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">UAE</span><span class="tag">PTFE</span><h4>Private School Al'Ain</h4></a>
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">US</span><span class="tag">PVC</span><h4>NCL Breakaway</h4></a>
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">NL</span><span class="tag">ETFE</span><h4>Alliander Duiven</h4></a>
+        <a class="card" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=700&q=60')"></div><span class="flag">HU</span><span class="tag">ETFE</span><h4>Aquaworld Budapest</h4></a>
+      </div>
+      <div class="hintbar">← drag / scroll →</div>
+    </div></div>
+  </section>
+
+  <!-- O4 -->
+  <section class="option o4">
+    <div class="option__bar"><span class="option__no">04</span><span class="option__name">International / Länder</span><span class="option__tag">— betont „7 Länder" · <b>stark für globale Reichweite</b></span></div>
+    <ul class="option__meta"><li><b>Layout:</b> Riesen-Kennzahl + Länder-Chips + Raster</li><li><b>Animation:</b> Reveal-Stagger, Chip-Hover</li><li><b>Stärke:</b> Internationalität als USP</li></ul>
+    <div class="frame"><div class="sec" data-reveal>
+      <div class="sec-head"><div><div class="ey reveal">Referenzen</div><h3 class="reveal d1">International im <em>Einsatz.</em></h3></div><a class="allbtn reveal d2" href="#">Alle →</a></div>
+      <div class="top">
+        <div class="big reveal d1">7<small>Länder</small></div>
+        <div class="flags reveal d2"><span>🇩🇪 Deutschland</span><span>🇳🇱 Niederlande</span><span>🇩🇰 Dänemark</span><span>🇭🇺 Ungarn</span><span>🇦🇪 VAE</span><span>🇺🇸 USA</span><span>🇨🇦 Kanada</span></div>
+      </div>
+      <div class="grid reveal d3">
+        <a class="proj" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=55')"></div><span class="loc">Rottweil · DE</span><h4>ThyssenKrupp Testturm</h4></a>
+        <a class="proj" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=600&q=55')"></div><span class="loc">Kopenhagen · DK</span><h4>FRBC-Center</h4></a>
+        <a class="proj" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=55')"></div><span class="loc">Al'Ain · UAE</span><h4>Private School</h4></a>
+        <a class="proj" href="#"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=600&q=55')"></div><span class="loc">New York · US</span><h4>NCL Breakaway</h4></a>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- O5 -->
+  <section class="option o5">
+    <div class="option__bar"><span class="option__no">05</span><span class="option__name">Big Slider</span><span class="option__tag">— ein Projekt groß, durchblättern · cinematisch</span></div>
+    <ul class="option__meta"><li><b>Layout:</b> Vollbild-Slider, Zähler 01/06</li><li><b>Animation:</b> Crossfade + langsamer Zoom</li><li><b>Stärke:</b> jedes Projekt als Bühne</li></ul>
+    <div class="frame"><div class="sec" data-reveal>
+      <div class="sec-head"><div><div class="ey reveal">Referenzen</div><h3 class="reveal d1">Im <em>Rampenlicht.</em></h3></div><a class="allbtn reveal d2" href="#">Alle →</a></div>
+      <div class="slider reveal d1" id="o5">
+        <div class="count"><b id="o5cur">01</b> / 06</div>
+        <div class="slide active"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">PTFE-Membranfassade</span><span class="loc">Rottweil · DE</span><h4>ThyssenKrupp Testturm</h4></div>
+        <div class="slide"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">PTFE-Konstruktion</span><span class="loc">Hamburg · DE</span><h4>HSV-Campus</h4></div>
+        <div class="slide"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">ETFE-Neueindeckung</span><span class="loc">Dresden · DE</span><h4>Elefantenhaus</h4></div>
+        <div class="slide"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">ETFE-Kissendach</span><span class="loc">Kopenhagen · DK</span><h4>FRBC-Center</h4></div>
+        <div class="slide"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">PTFE-Schulhof</span><span class="loc">Al'Ain · UAE</span><h4>Private School</h4></div>
+        <div class="slide"><div class="bg" style="background-image:url('https://images.unsplash.com/photo-1431576901776-e539bd916ba2?auto=format&fit=crop&w=1300&q=65')"></div><span class="tag">PVC-Sonnensegel</span><span class="loc">New York · US</span><h4>NCL Breakaway</h4></div>
+        <div class="ctrl"><button id="o5prev" aria-label="Zurück">‹</button><button id="o5next" aria-label="Weiter">›</button></div>
+      </div>
+    </div></div>
+  </section>
+
+  <p class="footnote"><b>Hinweis:</b> Interaktiver Vergleich (Sektion 4). Nach Wahl baue ich die Sektion als Next.js-Komponente
+    (Framer Motion, <code>next/image</code>, optional Filter nach Material/Land). <b>Bilder:</b> Unsplash-Platzhalter → eure echten Projektfotos.</p>
+</div>
+<script>
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting)})},{threshold:.15});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){io.observe(el)});
+
+  // O2 featured swap
+  var o2=document.getElementById('o2');
+  if(o2){var lis=o2.querySelectorAll('.li');lis.forEach(function(li){li.addEventListener('mouseenter',function(){
+    lis.forEach(function(x){x.classList.remove('active')});li.classList.add('active');
+    document.getElementById('o2bg').style.backgroundImage="url('"+li.dataset.img+"')";
+    document.getElementById('o2title').textContent=li.dataset.title;
+    document.getElementById('o2loc').textContent=li.dataset.loc;
+    document.getElementById('o2tag').textContent=li.dataset.tag;
+  });});}
+
+  // O3 drag-to-scroll
+  var rail=document.getElementById('o3rail');
+  if(rail){var down=false,sx,sl;
+    rail.addEventListener('mousedown',function(e){down=true;sx=e.pageX;sl=rail.scrollLeft;rail.style.cursor='grabbing'});
+    window.addEventListener('mouseup',function(){down=false;rail.style.cursor='grab'});
+    rail.addEventListener('mousemove',function(e){if(!down)return;e.preventDefault();rail.scrollLeft=sl-(e.pageX-sx)});}
+
+  // O5 slider
+  var o5=document.getElementById('o5');
+  if(o5){var slides=o5.querySelectorAll('.slide'),cur=0,curEl=document.getElementById('o5cur');
+    function go(n){slides[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');curEl.textContent=('0'+(cur+1)).slice(-2)}
+    document.getElementById('o5next').addEventListener('click',function(){go(cur+1)});
+    document.getElementById('o5prev').addEventListener('click',function(){go(cur-1)});}
+</script>
+</body>
+</html>
