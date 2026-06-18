@@ -31,7 +31,9 @@ als interaktive Live-Previews zur Auswahl gestellt.
   (`components/Hero.tsx`, `components/TrustStrip.tsx`)
 - ✅ Sektion 3 — Leistungen: **Option 01 „Bold Cards Grid"** (lückenlos
   gefülltes Raster, Service-Schema/JSON-LD) (`components/Leistungen.tsx`)
-- 🔄 Sektion 4 (als Nächstes)
+- ✅ Sektion 4 — Referenzen: **Option 01 „Project Grid"** mit Klick-Lightbox
+  (Vollbild, Pfeil-Navigation, ESC) (`components/Referenzen.tsx`)
+- 🔄 Sektion 5 (als Nächstes)
 
 ## Lokal starten
 ```bash

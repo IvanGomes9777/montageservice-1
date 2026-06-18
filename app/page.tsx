@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Leistungen from "@/components/Leistungen";
+import Referenzen from "@/components/Referenzen";
 import { company, services } from "@/lib/site";
 
 // Service-/ItemList-Schema (JSON-LD) – deckt sich exakt mit sichtbaren Leistungen.
@@ -43,9 +44,10 @@ export default function Home() {
       <Navbar />
 
       <main id="main">
-        {/* Sektion 1: Navbar ✓ · 2: Hero ✓ · 3: Leistungen ✓ */}
+        {/* Sektion 1: Navbar ✓ · 2: Hero ✓ · 3: Leistungen ✓ · 4: Referenzen ✓ */}
         <Hero />
         <Leistungen />
+        <Referenzen />
 
         {/* Platzhalter — weitere Sektionen folgen */}
         <section className="mx-auto max-w-3xl px-6 py-32 text-center">
@@ -53,7 +55,7 @@ export default function Home() {
             Platzhalter
           </p>
           <h2 className="mt-3 font-display text-3xl font-extrabold uppercase tracking-tight text-white">
-            Hier folgt Sektion 4
+            Hier folgt Sektion 5
           </h2>
         </section>
       </main>

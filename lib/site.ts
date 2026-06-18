@@ -102,6 +102,28 @@ export const services: Service[] = [
   },
 ];
 
+// Referenz-Projekte (Teaser) – reale Daten von der alten Website.
+// `image` = Grid-Vorschau, `full` = Lightbox in voller Größe.
+export type Reference = {
+  name: string;
+  location: string;
+  material: string;
+  image: string;
+  full: string;
+};
+
+const unsplash = (id: string, w: number) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=75`;
+
+export const references: Reference[] = [
+  { name: "ThyssenKrupp Testturm", location: "Rottweil · DE", material: "PTFE-Membranfassade", image: unsplash("photo-1473341304170-971dccb5ac1e", 900), full: unsplash("photo-1473341304170-971dccb5ac1e", 2000) },
+  { name: "HSV-Campus", location: "Hamburg · DE", material: "PTFE-Konstruktion", image: unsplash("photo-1518005020951-eccb494ad742", 900), full: unsplash("photo-1518005020951-eccb494ad742", 2000) },
+  { name: "Elefantenhaus", location: "Dresden · DE", material: "ETFE-Neueindeckung", image: unsplash("photo-1487958449943-2429e8be8625", 900), full: unsplash("photo-1487958449943-2429e8be8625", 2000) },
+  { name: "FRBC-Center", location: "Kopenhagen · DK", material: "ETFE-Kissendach", image: unsplash("photo-1449157291145-7efd050a4d0e", 900), full: unsplash("photo-1449157291145-7efd050a4d0e", 2000) },
+  { name: "Private School", location: "Al'Ain · UAE", material: "PTFE-Schulhof", image: unsplash("photo-1486406146926-c627a92ad1ab", 900), full: unsplash("photo-1486406146926-c627a92ad1ab", 2000) },
+  { name: "NCL Breakaway", location: "New York · US", material: "PVC-Sonnensegel", image: unsplash("photo-1431576901776-e539bd916ba2", 900), full: unsplash("photo-1431576901776-e539bd916ba2", 2000) },
+];
+
 // Hero-Kennzahlen ("Zahlen > Adjektive", B2B).
 export const heroKpis = [
   { value: "15+", label: "Jahre Erfahrung" },
