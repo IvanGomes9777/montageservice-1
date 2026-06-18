@@ -38,8 +38,23 @@ als interaktive Live-Previews zur Auswahl gestellt.
 - ✅ Sektion 6 — Footer: **Option 02 „Mega Wordmark"** mit DSGVO-Pflichtlinks
   (`components/Footer.tsx`)
 - ✅ **Startseite komplett (6/6 Sektionen)**
-- 🔄 Nächste Schritte: DSGVO/SEO-Basis (Impressum/Datenschutz, robots.txt,
-  sitemap, Schema) + Unterseiten
+- ✅ DSGVO/SEO-Basis: robots.txt, sitemap.xml, Organization/LocalBusiness-Schema
+- ✅ Rechtsseiten: Impressum (§ 5 DDG), Datenschutz (Art. 13 DSGVO)
+- ✅ Leistungs-Money-Pages (5) + Übersicht — answer-first, FAQ-/Service-Schema
+- ✅ Kontaktseite + DSGVO-Formular (Honeypot, Klick-to-load-Karte)
+- ✅ Referenzen-Vollseite (15 Projekte, filterbar, Lightbox)
+- ✅ Über uns · Presse · Karriere
+
+### Routen
+`/` · `/leistungen` (+5 Money-Pages) · `/referenzen` · `/ueber-uns` ·
+`/presse` · `/karriere` · `/kontakt` · `/impressum` · `/datenschutz` ·
+`/robots.txt` · `/sitemap.xml`
+
+### Offen / vor Livegang
+- Echte Projektfotos statt Unsplash-Platzhalter
+- Rechtstexte final prüfen (Generator/Anwalt)
+- Mailversand im Kontaktformular anbinden (z. B. Resend)
+- Echte Social-URLs, ggf. Versicherungssumme/BG-Bau ergänzen
 
 ## Lokal starten
 ```bash
