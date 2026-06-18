@@ -39,3 +39,21 @@ export const navItems: NavItem[] = [
 ];
 
 export const cta = { label: "Projekt anfragen", href: "/kontakt" };
+
+// "Bekannt aus" – reale Presse-/Referenz-Nennungen (Quelle: alte Website).
+export const pressMentions = [
+  "DMAX",
+  "Südkurier",
+  "Mittelbayerische",
+  "ThyssenKrupp",
+  "HSV",
+  "Alliander",
+] as const;
+
+// Hero-Kennzahlen ("Zahlen > Adjektive", B2B).
+export const heroKpis = [
+  { value: "15+", label: "Jahre Erfahrung" },
+  { value: "~70 m", label: "Einsatzhöhe · Hegau-Tower" },
+  { value: "7", label: "Länder Referenzen" },
+  { value: "2 Seile", label: "redundante Sicherung" },
+] as const;

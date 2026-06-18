@@ -30,8 +30,42 @@
   }
 }
 
+@layer utilities {
+  /* Langsamer Ken-Burns-Zoom fürs Hero-Bild */
+  .animate-kenburns {
+    animation: kenburns 20s ease-in-out infinite alternate;
+  }
+  /* Scroll-Cue-Bewegung */
+  .animate-bob {
+    animation: bob 2s ease-in-out infinite;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .animate-kenburns,
+  .animate-bob {
+    animation: none;
   }
 }

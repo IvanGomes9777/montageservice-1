@@ -24,9 +24,12 @@ als interaktive Live-Previews zur Auswahl gestellt.
 
 ### Aktueller Stand
 - ✅ Ist-Analyse der Altseite (Inhalt, Technik, SEO/GEO, Compliance)
-- ✅ Sektion 1 — Navbar/Header: **Option 02 „Industrie & Höhe / Bold"** gewählt
-  und als Produktions-Komponente umgesetzt (`components/Navbar.tsx`)
-- 🔄 Sektion 2 — Hero (als Nächstes)
+- ✅ Sektion 1 — Navbar/Header: **Option 02 „Industrie & Höhe / Bold"**
+  (`components/Navbar.tsx`)
+- ✅ Sektion 2 — Hero: **Option 01 „Fullscreen Impact"** mit Ken-Burns-Bild,
+  Stagger-Reveal, KPIs & „Bekannt aus"-Trust-Streifen
+  (`components/Hero.tsx`, `components/TrustStrip.tsx`)
+- 🔄 Sektion 3 (als Nächstes)
 
 ## Lokal starten
 ```bash
