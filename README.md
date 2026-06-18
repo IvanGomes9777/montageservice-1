@@ -24,4 +24,13 @@ als interaktive Live-Previews zur Auswahl gestellt.
 
 ### Aktueller Stand
 - ✅ Ist-Analyse der Altseite (Inhalt, Technik, SEO/GEO, Compliance)
-- 🔄 Sektion 1 — Navbar/Header: `previews/01-navbar-optionen.html` (5 Optionen, in Review)
+- ✅ Sektion 1 — Navbar/Header: **Option 02 „Industrie & Höhe / Bold"** gewählt
+  und als Produktions-Komponente umgesetzt (`components/Navbar.tsx`)
+- 🔄 Sektion 2 — Hero (als Nächstes)
+
+## Lokal starten
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # Production-Build
+```
