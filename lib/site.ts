@@ -50,6 +50,58 @@ export const pressMentions = [
   "Alliander",
 ] as const;
 
+// Leistungen für die Übersichts-Sektion (Card-Grid) + Money-Page-Links.
+export type Service = {
+  n: string;
+  label: string;
+  href: string;
+  desc: string;
+  image: string;
+};
+
+export const services: Service[] = [
+  {
+    n: "01",
+    label: "Membranbau",
+    href: "/leistungen/membranbau",
+    desc: "Textile Architektur aus ETFE, PVC & PTFE — geplant, montiert und gewartet.",
+    image:
+      "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    n: "02",
+    label: "Industrieklettern",
+    href: "/leistungen/industrieklettern",
+    desc: "Seilzugangstechnik nach FISAT & IRATA — wir erreichen, was ohne Gerüst unerreichbar scheint.",
+    image:
+      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    n: "03",
+    label: "Spezialmontagen",
+    href: "/leistungen/spezialmontagen",
+    desc: "Sonderkonstruktionen & modulare Strukturen, gewerkeübergreifend montiert — weltweit.",
+    image:
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    n: "04",
+    label: "Industrie- & Höhenreinigung",
+    href: "/leistungen/reinigung",
+    desc: "Materialschonende Membran- & Glasreinigung ohne Gerüst, mit biologisch abbaubaren Mitteln.",
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    n: "05",
+    label: "Inspektion & Wartung",
+    href: "/leistungen/inspektion-wartung",
+    desc: "Regelmäßige Prüfung von Material & Befestigung, lückenlose Doku & Reparatur.",
+    image:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=900&q=70",
+  },
+];
+
 // Hero-Kennzahlen ("Zahlen > Adjektive", B2B).
 export const heroKpis = [
   { value: "15+", label: "Jahre Erfahrung" },

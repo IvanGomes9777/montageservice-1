@@ -29,7 +29,9 @@ als interaktive Live-Previews zur Auswahl gestellt.
 - ✅ Sektion 2 — Hero: **Option 01 „Fullscreen Impact"** mit Ken-Burns-Bild,
   Stagger-Reveal, KPIs & „Bekannt aus"-Trust-Streifen
   (`components/Hero.tsx`, `components/TrustStrip.tsx`)
-- 🔄 Sektion 3 (als Nächstes)
+- ✅ Sektion 3 — Leistungen: **Option 01 „Bold Cards Grid"** (lückenlos
+  gefülltes Raster, Service-Schema/JSON-LD) (`components/Leistungen.tsx`)
+- 🔄 Sektion 4 (als Nächstes)
 
 ## Lokal starten
 ```bash
