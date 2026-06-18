@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sektion 2 · Hero — 5 Design-Optionen | Montageservice Duttle</title>
+
+<!-- PREVIEW-ONLY: Fonts per CDN. Produktion = next/font self-hosted (DSGVO). -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --black:#0E0E0E; --ink:#0C0D0F; --yellow:#FFD400; --steel:#3A3F44;
+    --muted:#8b9099; --line:#23262b;
+  }
+  html,body{margin:0}
+  body{background:var(--ink);color:#eef1f4;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin-inline:auto;padding:clamp(1.25rem,3vw,3rem)}
+
+  /* Showroom head */
+  .kicker{display:inline-flex;align-items:center;gap:.5rem;font:700 .72rem/1 'JetBrains Mono',monospace;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--black);background:var(--yellow);padding:.5rem .8rem}
+  .showroom-head h1{font:900 clamp(1.7rem,1rem+2.8vw,2.8rem)/1.05 Archivo;text-transform:uppercase;margin:.9rem 0 .4rem}
+  .showroom-head p{color:var(--muted);max-width:64ch;line-height:1.6;margin:0}
+  .legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem}
+  .legend span{font-size:.78rem;color:var(--muted);border:1px solid var(--line);padding:.35rem .7rem;border-radius:8px;background:#ffffff05}
+
+  /* Option card */
+  .option{margin:0 0 3.5rem}
+  .option__bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;margin-bottom:.9rem}
+  .option__no{font:900 1.05rem/1 'JetBrains Mono',monospace;color:var(--yellow)}
+  .option__name{font:800 1.2rem/1.2 Archivo;text-transform:uppercase}
+  .option__tag{font-size:.82rem;color:var(--muted)}
+  .option__meta{margin:.7rem 0 0;display:grid;gap:.4rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+  .option__meta li{list-style:none;font-size:.82rem;color:#b9bfc7;line-height:1.5;padding-left:1.1rem;position:relative}
+  .option__meta li::before{content:"▸";position:absolute;left:0;color:var(--yellow);font-size:.7rem;top:.2rem}
+  .option__meta b{color:#fff;font-weight:600}
+
+  .frame{margin-top:1rem;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 30px 60px -30px #000a}
+  .device{position:relative;background:var(--black)}
+
+  /* ---- shared mini bold navbar (Option 02 look) ---- */
+  .nav{position:absolute;inset-inline:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+    gap:1rem;padding:clamp(1rem,3vw,1.4rem) clamp(1rem,4vw,2.2rem)}
+  .nav .logo{display:flex;align-items:center;gap:.55rem;color:#fff;font:900 1.05rem/1 Archivo;text-transform:uppercase;text-decoration:none}
+  .nav .logo .mark{width:34px;height:34px;background:var(--yellow);color:var(--black);display:grid;place-items:center;
+    font:900 1rem/1 Archivo;clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)}
+  .nav .menu{display:flex;gap:.2rem}
+  .nav .menu a{color:#d6d6d6;text-decoration:none;font:700 .8rem/1 Archivo;text-transform:uppercase;letter-spacing:.03em;padding:.55rem .8rem}
+  .nav .menu a:hover{color:var(--yellow)}
+  .nav .navcta{background:var(--yellow);color:var(--black);font:800 .82rem/1 Archivo;text-transform:uppercase;
+    padding:.8rem 1.2rem;text-decoration:none;clip-path:polygon(8% 0,100% 0,100% 75%,92% 100%,0 100%,0 25%)}
+  @media (max-width:820px){.nav .menu{display:none}}
+
+  /* ---- shared CTAs ---- */
+  .btns{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.6rem}
+  .btn{font:800 .92rem/1 Archivo;text-transform:uppercase;letter-spacing:.02em;text-decoration:none;
+    padding:1rem 1.5rem;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
+  .btn-y{background:var(--yellow);color:var(--black);clip-path:polygon(6% 0,100% 0,100% 78%,94% 100%,0 100%,0 22%)}
+  .btn-y:hover{transform:translateY(-3px)}
+  .btn-o{border:2px solid #ffffff44;color:#fff;background:transparent}
+  .btn-o:hover{border-color:var(--yellow);color:var(--yellow)}
+
+  /* ---- shared "Bekannt aus" trust strip ---- */
+  .trust{display:flex;align-items:center;gap:clamp(1rem,3vw,2.4rem);flex-wrap:wrap;
+    padding:1rem clamp(1rem,4vw,2.2rem);border-top:1px solid #ffffff14;background:#00000040}
+  .trust .lbl{font:700 .68rem/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);white-space:nowrap}
+  .trust .logos{display:flex;align-items:center;gap:clamp(.9rem,2.5vw,2rem);flex-wrap:wrap}
+  .trust .logos span{font:800 .92rem/1 Archivo;letter-spacing:.02em;color:#cfd3d8;opacity:.6;
+    text-transform:uppercase;transition:opacity .25s ease,color .25s ease;cursor:default}
+  .trust .logos span:hover{opacity:1;color:#fff}
+
+  /* reveal animation base */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+  .in .reveal{opacity:1;transform:none}
+  .in .reveal.d1{transition-delay:.08s}.in .reveal.d2{transition-delay:.18s}
+  .in .reveal.d3{transition-delay:.28s}.in .reveal.d4{transition-delay:.38s}.in .reveal.d5{transition-delay:.5s}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}*{animation:none!important}}
+
+  /* badge */
+  .badge{display:inline-block;background:var(--yellow);color:var(--black);font:800 .72rem/1 Archivo;
+    text-transform:uppercase;letter-spacing:.1em;padding:.5rem .8rem;transform:skewX(-8deg)}
+  .badge b{transform:skewX(8deg);display:inline-block}
+
+  h2.hl{font:900 clamp(2rem,1rem+5vw,4rem)/.96 Archivo;text-transform:uppercase;letter-spacing:-.01em;color:#fff;margin:1rem 0 0}
+  h2.hl em{color:var(--yellow);font-style:normal}
+  .sub{color:#b9b9b9;line-height:1.6;max-width:46ch;margin-top:1.1rem;font-size:1.02rem}
+
+  /* =========================================================
+     OPTION 1 — Fullscreen Impact
+     ========================================================= */
+  .h1 .device{min-height:640px;display:flex;flex-direction:column;justify-content:flex-end}
+  .h1 .bg{position:absolute;inset:0;background:
+    linear-gradient(180deg,#0e0e0ecc 0%,#0e0e0e44 40%,#0e0e0e 95%),
+    url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1900&q=70') center/cover;
+    z-index:0;animation:kenburns 18s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12)}}
+  .h1 .inner{position:relative;z-index:10;padding:clamp(2rem,6vw,4.5rem) clamp(1rem,4vw,2.2rem) 2rem}
+  .h1 .kpis{display:flex;gap:clamp(1.2rem,4vw,3rem);flex-wrap:wrap;margin-top:1.8rem}
+  .h1 .kpis b{display:block;font:900 1.7rem/1 Archivo;color:var(--yellow)}
+  .h1 .kpis span{font:500 .72rem/1.3 'JetBrains Mono',monospace;color:#c9cdd3;text-transform:uppercase;letter-spacing:.05em}
+  .h1 .scrollcue{position:absolute;right:1.4rem;bottom:6.5rem;z-index:10;writing-mode:vertical-rl;
+    font:500 .68rem/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#fff8;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* =========================================================
+     OPTION 2 — Split Editorial
+     ========================================================= */
+  .h2o .device{display:grid;grid-template-columns:1.05fr .95fr;min-height:600px}
+  .h2o .left{position:relative;z-index:5;padding:clamp(4.5rem,8vw,6rem) clamp(1.25rem,4vw,3rem) 0;display:flex;flex-direction:column}
+  .h2o .idx{font:900 .8rem/1 'JetBrains Mono',monospace;color:var(--yellow);letter-spacing:.1em}
+  .h2o .right{position:relative;overflow:hidden}
+  .h2o .right .img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1300&q=70') center/cover;
+    clip-path:inset(0 0 0 100%);transition:clip-path 1s cubic-bezier(.2,.8,.2,1)}
+  .h2o.in .right .img{clip-path:inset(0 0 0 0%)}
+  .h2o .right::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0e0e0e 0%,transparent 22%)}
+  .h2o .divider{position:absolute;left:0;top:18%;bottom:18%;width:4px;background:var(--yellow);z-index:8}
+  .h2o .kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid #ffffff1a;margin-top:2rem;max-width:30rem}
+  .h2o .kgrid div{padding:1rem;border-right:1px solid #ffffff1a}
+  .h2o .kgrid div:last-child{border-right:none}
+  .h2o .kgrid b{display:block;font:900 1.4rem/1 Archivo;color:#fff}
+  .h2o .kgrid span{font:500 .66rem/1.3 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase}
+  @media (max-width:820px){.h2o .device{grid-template-columns:1fr}.h2o .right{min-height:240px}.h2o .divider{display:none}
+    .h2o .right .img{clip-path:inset(100% 0 0 0)}.h2o.in .right .img{clip-path:inset(0 0 0 0)}}
+
+  /* =========================================================
+     OPTION 3 — Diagonal / Skew Cut
+     ========================================================= */
+  .h3o .device{position:relative;min-height:600px;overflow:hidden;display:flex;align-items:center}
+  .h3o .bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1900&q=70') center/cover;z-index:0}
+  .h3o .panel{position:absolute;inset:0;z-index:5;background:var(--black);
+    clip-path:polygon(0 0,58% 0,42% 100%,0 100%);transition:clip-path 1s cubic-bezier(.2,.8,.2,1)}
+  .h3o:not(.in) .panel{clip-path:polygon(0 0,0 0,0 100%,0 100%)}
+  .h3o .slash{position:absolute;inset:0;z-index:6;pointer-events:none}
+  .h3o .slash::before{content:"";position:absolute;top:-10%;bottom:-10%;left:50%;width:10px;background:var(--yellow);
+    transform:skewX(-18deg)}
+  .h3o .inner{position:relative;z-index:10;padding:clamp(2rem,5vw,3rem) clamp(1.25rem,4vw,3rem);max-width:36rem}
+  .h3o .marquee{position:absolute;left:0;right:0;bottom:0;z-index:12;overflow:hidden;border-top:2px solid var(--yellow);background:#0e0e0ecc}
+  .h3o .marquee .track{display:inline-flex;gap:2.5rem;white-space:nowrap;padding:.7rem 0;
+    font:800 .82rem/1 Archivo;text-transform:uppercase;color:#e7e7e7;animation:scrollx 18s linear infinite}
+  .h3o .marquee .track b{color:var(--yellow)}
+  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (max-width:820px){.h3o .panel{clip-path:polygon(0 0,100% 0,100% 62%,0 78%)!important}}
+
+  /* =========================================================
+     OPTION 4 — Stat-Forward / Data
+     ========================================================= */
+  .h4o .device{min-height:600px;display:grid;grid-template-columns:1.2fr .8fr}
+  .h4o .left{padding:clamp(4.5rem,8vw,5.5rem) clamp(1.25rem,4vw,3rem) 2rem}
+  .h4o .right{position:relative;overflow:hidden;border-left:1px solid #ffffff14}
+  .h4o .right .img{position:absolute;inset:0;background:linear-gradient(180deg,#0e0e0e55,#0e0e0e),
+    url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1100&q=70') center/cover}
+  .h4o .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#ffffff14;border:1px solid #ffffff14;margin-top:2rem;max-width:34rem}
+  .h4o .stats div{background:var(--black);padding:1.3rem 1.2rem}
+  .h4o .stats b{display:block;font:900 2.4rem/1 Archivo;color:var(--yellow)}
+  .h4o .stats span{font:500 .7rem/1.3 'JetBrains Mono',monospace;color:#c4c8ce;text-transform:uppercase;letter-spacing:.04em}
+  @media (max-width:820px){.h4o .device{grid-template-columns:1fr}.h4o .right{min-height:200px}}
+
+  /* =========================================================
+     OPTION 5 — Magazine Grid
+     ========================================================= */
+  .h5o .device{position:relative;min-height:620px;display:flex;flex-direction:column;justify-content:center}
+  .h5o .bg{position:absolute;inset:0;background:linear-gradient(120deg,#0e0e0eee 30%,#0e0e0e88),
+    url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&w=1900&q=70') center/cover;z-index:0}
+  .h5o .grid-lines{position:absolute;inset:0;z-index:1;
+    background-image:linear-gradient(#ffffff10 1px,transparent 1px),linear-gradient(90deg,#ffffff10 1px,transparent 1px);
+    background-size:25% 33.33%}
+  .h5o .inner{position:relative;z-index:10;padding:clamp(2rem,5vw,3rem) clamp(1.25rem,4vw,3rem)}
+  .h5o .hblock{display:inline-block;background:var(--yellow);color:var(--black);padding:.3rem .8rem;
+    font:900 clamp(1.8rem,1rem+4vw,3.4rem)/1.05 Archivo;text-transform:uppercase;margin:.2rem 0}
+  .h5o .cards{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap}
+  .h5o .card{flex:1 1 180px;border:1px solid #ffffff22;background:#0c0d0fcc;padding:1.1rem;
+    transition:border-color .25s ease,transform .25s ease}
+  .h5o .card:hover{border-color:var(--yellow);transform:translateY(-4px)}
+  .h5o .card .n{font:700 .66rem/1 'JetBrains Mono',monospace;color:var(--yellow)}
+  .h5o .card b{display:block;font:800 1.05rem/1.1 Archivo;text-transform:uppercase;margin-top:.5rem;color:#fff}
+
+  .footnote{color:var(--muted);font-size:.84rem;line-height:1.7;border-top:1px solid var(--line);margin-top:1rem;padding-top:1.5rem}
+  .footnote b{color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="showroom-head">
+    <span class="kicker">● Sektion 2 / Hero · 5 Optionen</span>
+    <h1>5 Hero-Optionen — passend zur Bold-Navbar</h1>
+    <p>Alle in Schwarz/Gelb (Archivo), jede mit eigenem Animationskonzept und integriertem
+       <b>„Bekannt aus"-Trust-Streifen</b> (DMAX, Südkurier, ThyssenKrupp, HSV, Alliander).
+       Scrolle durch — die Reveal-Animationen lösen beim Reinscrollen aus; Buttons &amp; Logos sind hoverbar.</p>
+    <div class="legend">
+      <span>↕️ Scroll = Reveal-Animation</span>
+      <span>🖱️ Hover = Micro-Interactions</span>
+      <span>🏆 Presse-Trust integriert</span>
+      <span>🎨 Bold-Designsprache (gewählte Navbar)</span>
+    </div>
+  </header>
+
+  <!-- ============== OPTION 1 ============== -->
+  <section class="option h1">
+    <div class="option__bar"><span class="option__no">01</span><span class="option__name">Fullscreen Impact</span>
+      <span class="option__tag">— großes Vollbild-Foto, maximale Wucht · <b>Klassiker für Adrenalin</b></span></div>
+    <ul class="option__meta">
+      <li><b>Layout:</b> Vollbild-Höhenfoto, Headline unten links</li>
+      <li><b>Animation:</b> langsamer Ken-Burns-Zoom, Reveal-Stagger, Scroll-Cue</li>
+      <li><b>Inhalt:</b> Badge · Headline · Sub · 2 CTAs · KPI-Reihe</li>
+      <li><b>Trust:</b> „Bekannt aus"-Streifen ganz unten</li>
+    </ul>
+    <div class="frame"><div class="device" data-reveal>
+      <div class="bg"></div>
+      <nav class="nav">
+        <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+        <div class="menu"><a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a></div>
+        <a class="navcta" href="#">Projekt anfragen</a>
+      </nav>
+      <span class="scrollcue">SCROLL ↓</span>
+      <div class="inner">
+        <span class="badge reveal d1"><b>Höhenarbeit ohne Gerüst · seit 2011</b></span>
+        <h2 class="hl reveal d2">Wir arbeiten dort,<br>wo andere <em>aufhören.</em></h2>
+        <p class="sub reveal d3">Seilzugangstechnik nach FISAT &amp; IRATA — Membranbau, Montage &amp; Reinigung in jeder Höhe. Ohne Gerüst, aus einer Hand.</p>
+        <div class="btns reveal d4">
+          <a class="btn btn-y" href="#">Projekt anfragen</a>
+          <a class="btn btn-o" href="#">Referenzen ansehen</a>
+        </div>
+        <div class="kpis reveal d5">
+          <div><b>15+</b><span>Jahre<br>Erfahrung</span></div>
+          <div><b>~70 m</b><span>Einsatzhöhe<br>(Hegau-Tower)</span></div>
+          <div><b>7</b><span>Länder<br>Referenzen</span></div>
+          <div><b>2 Seile</b><span>redundante<br>Sicherung</span></div>
+        </div>
+      </div>
+      <div class="trust reveal d5">
+        <span class="lbl">Bekannt aus</span>
+        <div class="logos"><span>DMAX</span><span>Südkurier</span><span>Mittelbayerische</span><span>ThyssenKrupp</span><span>HSV</span><span>Alliander</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============== OPTION 2 ============== -->
+  <section class="option h2o">
+    <div class="option__bar"><span class="option__no">02</span><span class="option__name">Split Editorial</span>
+      <span class="option__tag">— Text links / Bild rechts, redaktionell &amp; aufgeräumt</span></div>
+    <ul class="option__meta">
+      <li><b>Layout:</b> 2-spaltig, gelber Trennbalken, Index-Nummer</li>
+      <li><b>Animation:</b> Bild-Clip-Reveal von rechts, Text-Stagger</li>
+      <li><b>Inhalt:</b> Headline · Sub · CTAs · KPI-Raster (3)</li>
+      <li><b>Trust:</b> „Bekannt aus"-Streifen unter beiden Spalten</li>
+    </ul>
+    <div class="frame"><div class="device" data-reveal>
+      <nav class="nav">
+        <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+        <div class="menu"><a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a></div>
+        <a class="navcta" href="#">Projekt anfragen</a>
+      </nav>
+      <div class="divider"></div>
+      <div class="left">
+        <span class="idx reveal d1">001 — SPEZIALIST FÜR HÖHE</span>
+        <h2 class="hl reveal d2">Höhe ist<br>unser <em>Zuhause.</em></h2>
+        <p class="sub reveal d3">Membranbau, Industrieklettern, Spezialmontagen und Reinigung — gewerkeübergreifend, dokumentiert, weltweit im Einsatz.</p>
+        <div class="btns reveal d4">
+          <a class="btn btn-y" href="#">Projekt anfragen</a>
+          <a class="btn btn-o" href="#">Leistungen</a>
+        </div>
+        <div class="kgrid reveal d5">
+          <div><b>15+</b><span>Jahre</span></div>
+          <div><b>FISAT</b><span>&amp; IRATA</span></div>
+          <div><b>7</b><span>Länder</span></div>
+        </div>
+        <div style="flex:1"></div>
+      </div>
+      <div class="right"><div class="img"></div></div>
+      <div class="trust reveal d5" style="grid-column:1/-1">
+        <span class="lbl">Bekannt aus</span>
+        <div class="logos"><span>DMAX</span><span>Südkurier</span><span>Mittelbayerische</span><span>ThyssenKrupp</span><span>HSV</span><span>Alliander</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============== OPTION 3 ============== -->
+  <section class="option h3o">
+    <div class="option__bar"><span class="option__no">03</span><span class="option__name">Diagonal / Skew Cut</span>
+      <span class="option__tag">— diagonaler Gelb-Schnitt, sehr dynamisch · industriell</span></div>
+    <ul class="option__meta">
+      <li><b>Layout:</b> Diagonale teilt Bild &amp; Textpanel, gelber Slash</li>
+      <li><b>Animation:</b> Panel-Wipe beim Reveal, Lauf-Ticker unten</li>
+      <li><b>Inhalt:</b> Headline · Sub · CTAs · Marquee-Trust</li>
+      <li><b>Trust:</b> „Bekannt aus" als Endlos-Ticker</li>
+    </ul>
+    <div class="frame"><div class="device" data-reveal>
+      <div class="bg"></div>
+      <div class="panel"></div>
+      <div class="slash"></div>
+      <nav class="nav">
+        <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+        <div class="menu"><a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a></div>
+        <a class="navcta" href="#">Projekt anfragen</a>
+      </nav>
+      <div class="inner">
+        <span class="badge reveal d1"><b>Geht nicht, gibt's nicht</b></span>
+        <h2 class="hl reveal d2">Kein Gerüst.<br>Keine Ausreden.<br><em>Nur Ergebnisse.</em></h2>
+        <p class="sub reveal d3">Wo Hubsteiger und Gerüst scheitern, seilen wir uns ab — sicher nach DGUV &amp; TRBS, im laufenden Betrieb.</p>
+        <div class="btns reveal d4"><a class="btn btn-y" href="#">Projekt anfragen</a><a class="btn btn-o" href="#">Referenzen</a></div>
+      </div>
+      <div class="marquee">
+        <div class="track">
+          <span><b>Bekannt aus:</b></span><span>DMAX „Helden der Baustelle"</span><span><b>·</b></span><span>Südkurier</span><span><b>·</b></span><span>ThyssenKrupp Testturm</span><span><b>·</b></span><span>HSV-Campus</span><span><b>·</b></span><span>Alliander</span><span><b>·</b></span>
+          <span><b>Bekannt aus:</b></span><span>DMAX „Helden der Baustelle"</span><span><b>·</b></span><span>Südkurier</span><span><b>·</b></span><span>ThyssenKrupp Testturm</span><span><b>·</b></span><span>HSV-Campus</span><span><b>·</b></span><span>Alliander</span><span><b>·</b></span>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============== OPTION 4 ============== -->
+  <section class="option h4o">
+    <div class="option__bar"><span class="option__no">04</span><span class="option__name">Stat-Forward / Data</span>
+      <span class="option__tag">— Zahlen &gt; Adjektive · <b>am stärksten für B2B-Entscheider</b></span></div>
+    <ul class="option__meta">
+      <li><b>Layout:</b> Text + Foto-Panel, große Kennzahlen im Fokus</li>
+      <li><b>Animation:</b> Count-Up der Zahlen beim Reinscrollen</li>
+      <li><b>Inhalt:</b> Headline · 4 KPI-Kacheln · CTAs</li>
+      <li><b>Trust:</b> „Bekannt aus"-Streifen unten</li>
+    </ul>
+    <div class="frame"><div class="device" data-reveal>
+      <nav class="nav">
+        <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+        <div class="menu"><a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a></div>
+        <a class="navcta" href="#">Projekt anfragen</a>
+      </nav>
+      <div class="left">
+        <span class="badge reveal d1"><b>Spezialist für Arbeiten in der Höhe</b></span>
+        <h2 class="hl reveal d2">15 Jahre. 7 Länder.<br>Eine <em>Spezialität:</em><br>die Höhe.</h2>
+        <div class="stats reveal d4">
+          <div><b data-count="15" data-suffix="+">0</b><span>Jahre Erfahrung (seit 2011)</span></div>
+          <div><b data-count="70" data-suffix=" m">0</b><span>Einsatzhöhe · Hegau-Tower</span></div>
+          <div><b data-count="7" data-suffix="">0</b><span>Länder mit Referenzen</span></div>
+          <div><b data-count="100" data-suffix="%">0</b><span>FISAT &amp; IRATA konform</span></div>
+        </div>
+        <div class="btns reveal d5"><a class="btn btn-y" href="#">Projekt anfragen</a><a class="btn btn-o" href="#">Mehr erfahren</a></div>
+      </div>
+      <div class="right"><div class="img"></div></div>
+      <div class="trust reveal d5" style="grid-column:1/-1">
+        <span class="lbl">Bekannt aus</span>
+        <div class="logos"><span>DMAX</span><span>Südkurier</span><span>Mittelbayerische</span><span>ThyssenKrupp</span><span>HSV</span><span>Alliander</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- ============== OPTION 5 ============== -->
+  <section class="option h5o">
+    <div class="option__bar"><span class="option__no">05</span><span class="option__name">Magazine Grid</span>
+      <span class="option__tag">— Raster-Overlay, Headline im Gelb-Block, Leistungs-Karten</span></div>
+    <ul class="option__meta">
+      <li><b>Layout:</b> Foto + technisches Raster, Leistungen als Karten-Reihe</li>
+      <li><b>Animation:</b> Raster-Lines, Karten-Hover-Lift, Reveal-Stagger</li>
+      <li><b>Inhalt:</b> Headline-Blöcke · 4 Leistungs-Karten · CTA</li>
+      <li><b>Trust:</b> „Bekannt aus"-Streifen unten</li>
+    </ul>
+    <div class="frame"><div class="device" data-reveal>
+      <div class="bg"></div><div class="grid-lines"></div>
+      <nav class="nav">
+        <a class="logo" href="#"><span class="mark">D</span>DUTTLE</a>
+        <div class="menu"><a href="#">Leistungen</a><a href="#">Referenzen</a><a href="#">Über uns</a><a href="#">Presse</a><a href="#">Kontakt</a></div>
+        <a class="navcta" href="#">Projekt anfragen</a>
+      </nav>
+      <div class="inner">
+        <span class="badge reveal d1"><b>Münster · DE + EU</b></span>
+        <div style="margin-top:1rem">
+          <span class="hblock reveal d2">Membranbau.</span><br>
+          <span class="hblock reveal d2">Industrieklettern.</span><br>
+          <span class="hblock reveal d3">Montage &amp; Reinigung.</span>
+        </div>
+        <p class="sub reveal d3">Ein Team, ein Ansprechpartner — alles in der Höhe &amp; am Bau.</p>
+        <div class="cards">
+          <div class="card reveal d3"><span class="n">01</span><b>Membranbau</b></div>
+          <div class="card reveal d4"><span class="n">02</span><b>Industrieklettern</b></div>
+          <div class="card reveal d4"><span class="n">03</span><b>Spezialmontagen</b></div>
+          <div class="card reveal d5"><span class="n">04</span><b>Reinigung</b></div>
+        </div>
+        <div class="btns reveal d5"><a class="btn btn-y" href="#">Projekt anfragen</a></div>
+      </div>
+      <div class="trust reveal d5">
+        <span class="lbl">Bekannt aus</span>
+        <div class="logos"><span>DMAX</span><span>Südkurier</span><span>Mittelbayerische</span><span>ThyssenKrupp</span><span>HSV</span><span>Alliander</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <p class="footnote">
+    <b>Hinweis:</b> Interaktiver Design-Vergleich (Sektion 2). Nach deiner Wahl baue ich den Hero als
+    saubere Next.js-Komponente (Framer-Motion-Reveals, <code>next/image</code> für die Höhenfotos, self-hosted Fonts, Schema-ready).<br>
+    <b>Bilder:</b> Unsplash-Platzhalter — werden durch eure echten Projektfotos (z. B. ThyssenKrupp Testturm, Hegau-Tower) ersetzt.
+  </p>
+</div>
+
+<script>
+  // Reveal beim Reinscrollen (re-triggert, damit man's mehrfach sieht)
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); startCount(e.target); }
+      else { e.target.classList.remove('in'); resetCount(e.target); }
+    });
+  }, {threshold:.35});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+  // Count-Up (Option 4)
+  function startCount(scope){
+    scope.querySelectorAll('[data-count]').forEach(function(el){
+      if(el.dataset.done) return;
+      var target=+el.dataset.count, suffix=el.dataset.suffix||'', dur=1100, t0=null;
+      function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
+        var val=Math.round(target*(1-Math.pow(1-p,3)));
+        el.textContent=val+suffix; if(p<1)requestAnimationFrame(step); else el.dataset.done="1"; }
+      requestAnimationFrame(step);
+    });
+  }
+  function resetCount(scope){
+    scope.querySelectorAll('[data-count]').forEach(function(el){ delete el.dataset.done; el.textContent='0'; });
+  }
+</script>
+</body>
+</html>
