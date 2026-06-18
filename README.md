@@ -33,7 +33,9 @@ als interaktive Live-Previews zur Auswahl gestellt.
   gefülltes Raster, Service-Schema/JSON-LD) (`components/Leistungen.tsx`)
 - ✅ Sektion 4 — Referenzen: **Option 01 „Project Grid"** mit Klick-Lightbox
   (Vollbild, Pfeil-Navigation, ESC) (`components/Referenzen.tsx`)
-- 🔄 Sektion 5 (als Nächstes)
+- ✅ Sektion 5 — Sicherheit & Qualität: **Option 02 „Split + Checkliste"**
+  + wiederverwendbarer CTA-Banner (`components/Sicherheit.tsx`, `CtaBanner.tsx`)
+- 🔄 Sektion 6 — Footer (als Nächstes)
 
 ## Lokal starten
 ```bash

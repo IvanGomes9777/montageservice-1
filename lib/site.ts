@@ -124,6 +124,30 @@ export const references: Reference[] = [
   { name: "NCL Breakaway", location: "New York · US", material: "PVC-Sonnensegel", image: unsplash("photo-1431576901776-e539bd916ba2", 900), full: unsplash("photo-1431576901776-e539bd916ba2", 2000) },
 ];
 
+// Trust-/Sicherheitspunkte (Checkliste) – reale Fakten.
+export const trustPoints = [
+  {
+    title: "Zertifizierte Höhenarbeiter",
+    desc: "FISAT & IRATA, aktuelle Sachkunde, jährliche PSA-Prüfung.",
+  },
+  {
+    title: "Normgerecht nach DGUV & TRBS",
+    desc: "DGUV 212-001, TRBS 2121-3, dokumentierte Gefährdungsbeurteilung.",
+  },
+  {
+    title: "Redundantes Doppelseilsystem",
+    desc: "Trag- und Sicherungsseil getrennt — Rettungskonzept < 20 Min.",
+  },
+  {
+    title: "Ohne Gerüst — schneller & günstiger",
+    desc: "Oft Arbeiten im laufenden Betrieb, kurze Rüstzeiten.",
+  },
+  {
+    title: "Eingetragener Handwerksbetrieb",
+    desc: "HWK Münster · ein Ansprechpartner, gewerkeübergreifend.",
+  },
+] as const;
+
 // Hero-Kennzahlen ("Zahlen > Adjektive", B2B).
 export const heroKpis = [
   { value: "15+", label: "Jahre Erfahrung" },
