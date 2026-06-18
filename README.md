@@ -35,7 +35,11 @@ als interaktive Live-Previews zur Auswahl gestellt.
   (Vollbild, Pfeil-Navigation, ESC) (`components/Referenzen.tsx`)
 - ✅ Sektion 5 — Sicherheit & Qualität: **Option 02 „Split + Checkliste"**
   + wiederverwendbarer CTA-Banner (`components/Sicherheit.tsx`, `CtaBanner.tsx`)
-- 🔄 Sektion 6 — Footer (als Nächstes)
+- ✅ Sektion 6 — Footer: **Option 02 „Mega Wordmark"** mit DSGVO-Pflichtlinks
+  (`components/Footer.tsx`)
+- ✅ **Startseite komplett (6/6 Sektionen)**
+- 🔄 Nächste Schritte: DSGVO/SEO-Basis (Impressum/Datenschutz, robots.txt,
+  sitemap, Schema) + Unterseiten
 
 ## Lokal starten
 ```bash

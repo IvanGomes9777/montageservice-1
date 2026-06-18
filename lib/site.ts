@@ -124,6 +124,28 @@ export const references: Reference[] = [
   { name: "NCL Breakaway", location: "New York · US", material: "PVC-Sonnensegel", image: unsplash("photo-1431576901776-e539bd916ba2", 900), full: unsplash("photo-1431576901776-e539bd916ba2", 2000) },
 ];
 
+// Footer-Navigation & Social.
+export const companyLinks = [
+  { label: "Über uns", href: "/ueber-uns" },
+  { label: "Referenzen", href: "/referenzen" },
+  { label: "Presse", href: "/presse" },
+  { label: "Karriere", href: "/karriere" },
+  { label: "Kontakt", href: "/kontakt" },
+];
+
+export const legalLinks = [
+  { label: "Impressum", href: "/impressum" },
+  { label: "Datenschutz", href: "/datenschutz" },
+];
+
+// Social-Profile – echte URLs bitte nachreichen (Platzhalter "#" außer WhatsApp).
+export const socials = [
+  { label: "Instagram", href: "#" },
+  { label: "Facebook", href: "#" },
+  { label: "LinkedIn", href: "#" },
+  { label: "WhatsApp", href: "https://wa.me/491741708926" },
+];
+
 // Trust-/Sicherheitspunkte (Checkliste) – reale Fakten.
 export const trustPoints = [
   {
