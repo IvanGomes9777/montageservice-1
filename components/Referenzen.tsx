@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
-import { references } from "@/lib/site";
+import { featuredReferences as references } from "@/lib/referenzen";
 
 /**
  * Referenzen — Design "Project Grid" (Option 01) mit Klick-Lightbox.
@@ -119,7 +119,7 @@ export default function Referenzen() {
 
                 <div className="relative z-10">
                   <span className="font-mono text-xs font-medium uppercase tracking-wide text-duttle-yellow">
-                    {p.location}
+                    {p.location} · {p.country}
                   </span>
                   <h3 className="mt-1 font-display text-xl font-extrabold uppercase leading-tight tracking-tight text-white">
                     {p.name}
@@ -193,7 +193,7 @@ export default function Referenzen() {
               <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <span className="font-mono text-xs uppercase tracking-wide text-duttle-yellow">
-                    {active.location} · {active.material}
+                    {active.location} · {active.country} · {active.detail}
                   </span>
                   <p className="font-display text-lg font-extrabold uppercase tracking-tight text-white">
                     {active.name}
